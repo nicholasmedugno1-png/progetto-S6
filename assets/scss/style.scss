@@ -1,17 +1,10 @@
-// BUTTON: sfondo e bordo hsl(20, 30%, 35%)
-// BUTTON HOVER: sfondo e bordo hsl(20, 30%, 27%)
-// COLORE TESTO: hsl(20, 30%, 35%)
-// SFONDO PRINCIPALE: hsl(20, 30%, 35%)
-// SFONDO NAV: hsl(20, 20%, 15%)
-// SFONDO HERO: hsl(20, 30%, 35%)
-// BOX SHADOW CARD: 0 2px 6px rgba(0, 0, 0, 0.08)
-// BOX SHADOW CARD HOVER: 0 10px 24px rgba(0, 0, 0, 0.12)
-// SFONDO FOOTER: hsl(20, 20%, 15%)
-// LINK FOOTER HOVER: hsl(40, 30%, 90%)
-
 $sfondoNavFooter: hsl(20, 20%, 15%);
 $sfondoHero:  hsl(20, 30%, 35%);
 $textProgrct:  hsl(20, 30%, 35%);
+
+html {
+    scroll-padding-top: 200px;
+}
 
 @mixin btnProgectDefoult {
     background-color: hsl(20, 30%, 35%);
@@ -23,7 +16,6 @@ $textProgrct:  hsl(20, 30%, 35%);
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
-
 
 .navbar-brand,
 .nav-link {
@@ -68,8 +60,7 @@ $textProgrct:  hsl(20, 30%, 35%);
 
 .card {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    
-    
+       
     &:hover {
         @include animationCard()
     }
@@ -78,7 +69,6 @@ $textProgrct:  hsl(20, 30%, 35%);
     }
 }
     
-
 .nav-link {
     color: $textProgrct !important;
     border-radius: 8px
@@ -90,7 +80,30 @@ $textProgrct:  hsl(20, 30%, 35%);
     color: $sfondoNavFooter !important;
 }
 
-input:focus {
-    box-shadow: none;
+
+.darkModeForm {
+    background-color: #2c3034 !important;
+    color: $textProgrct;
 }
 
+#checkNativeSwitch:focus {
+    box-shadow: none;
+    border-color: aliceblue;
+}
+
+#btnInvia:hover {
+    background-color: hsl(20, 30%, 28%);
+}
+
+body{
+    animation: refresh 0.7s ease-in-out;;
+}
+
+@keyframes refresh {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

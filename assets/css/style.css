@@ -1,3 +1,7 @@
+html {
+  scroll-padding-top: 200px;
+}
+
 .navbar-brand,
 .nav-link {
   color: hsl(30, 12%, 94%) !important;
@@ -60,8 +64,31 @@
   color: hsl(20, 20%, 15%) !important;
 }
 
-input:focus {
+.darkModeForm {
+  background-color: #2c3034 !important;
+  color: hsl(20, 30%, 35%);
+}
+
+#checkNativeSwitch:focus {
   box-shadow: none;
+  border-color: aliceblue;
+}
+
+#btnInvia:hover {
+  background-color: hsl(20, 30%, 28%);
+}
+
+body {
+  animation: refresh 0.7s ease-in-out;
+}
+
+@keyframes refresh {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

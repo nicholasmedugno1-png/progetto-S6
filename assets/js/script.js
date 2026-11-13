@@ -1,3 +1,9 @@
+//extra: il form se compilato correttamente stampa un mex di confrerma con nome e email 
+//        in caso di errore stampa il mex di errore 
+//          animazione refresh card 
+//           dark mode
+//          click su card apre modale con descrizione specifica se si clicca fuori dalla modale non si chiude ma pulsa          
+
 const myArrayCard = [
     {
         icon: '🏠',
@@ -7,7 +13,7 @@ const myArrayCard = [
     {
         icon: '🪑',
         title: 'Interior design',
-        desc:'Allestimenti d\'interno per case e uffici, con materiali selezionati e arredo su misura' ,
+        desc: 'Allestimenti d\'interno per case e uffici, con materiali selezionati e arredo su misura',
     },
     {
         icon: '🧱',
@@ -60,8 +66,8 @@ const containerCard = document.querySelector('#containerCard')
 const containerJobs = document.querySelector('#containerJobs')
 
 myArrayCard.forEach((item) => {
-    
-containerCard.append(creaCard(item))
+
+    containerCard.append(creaCard(item))
 })
 
 
@@ -69,7 +75,7 @@ function creaCard(item) {
     const MyArticle = document.createElement('article');
     MyArticle.classList.add('col-12', 'col-md-4');
     const myDivCard = document.createElement('div')
-     myDivCard.classList.add('card','d-flex', 'flex-column', 'text-center', 'h-100','p-1');
+    myDivCard.classList.add('card', 'd-flex', 'flex-column', 'text-center', 'h-100', 'p-1');
     const myIconCard = document.createElement('span')
     myIconCard.textContent = `${item.icon}`
     myIconCard.classList.add('fs-2')
@@ -79,7 +85,7 @@ function creaCard(item) {
     const myDescCard = document.createElement('p')
     myDescCard.textContent = `${item.desc}`
     myDescCard.classList.add('text-muted')
-    
+
     myDivCard.append(myIconCard, myTitleCard, myDescCard)
     MyArticle.append(myDivCard)
     return MyArticle
@@ -113,8 +119,8 @@ function stampaCard(array, contenitorePadre) {
         myDivCard.append(myDivInterno, myTitleProd, myDescri);
         myArt.appendChild(myDivCard);
         contenitorePadre.appendChild(myArt)
-    
-        
+
+
         myDivCard.addEventListener('click', (e) => {
             const myModal = document.createElement('div')
             myModal.classList.add('modal', 'fade')
@@ -158,8 +164,8 @@ function stampaCard(array, contenitorePadre) {
             btnChiudiModal.classList.add('btn', 'btn-secondary');
             btnChiudiModal.textContent = 'Chiudi';
             btnChiudiModal.setAttribute('data-bs-dismiss', 'modal');
-            
-      myModal.appendChild(myModalDialog)
+
+            myModal.appendChild(myModalDialog)
             myModalDialog.appendChild(myModalContent)
             myModalContent.append(myModalHead, myModalBody, myFooterModal)
             myModalHead.append(myTitleModal, btnClose);
@@ -167,13 +173,85 @@ function stampaCard(array, contenitorePadre) {
             myFooterModal.append(btnChiudiModal)
             document.body.appendChild(myModal);
 
-            const myModalBootstrap = new bootstrap.Modal(myModal); 
-            myModalBootstrap.show(); 
+            const myModalBootstrap = new bootstrap.Modal(myModal);
+            myModalBootstrap.show();
 
-              })
+        })
     });
 
 }
 
 
 stampaCard(myJobs, containerJobs);
+
+// DARK MODE
+const checkNativeSwitch = document.querySelector('#checkNativeSwitch');
+checkNativeSwitch.addEventListener('change', (e) => {
+    const myIcon = document.querySelector('#toogleDark')
+    const myHtml = document.querySelector('html')
+    const myForm = document.querySelector('form')
+    if (myHtml.getAttribute('data-bs-theme') === 'dark') {
+        myHtml.setAttribute('data-bs-theme', 'light');
+        myIcon.classList.add('fa-moon', 'text-black',);
+        myForm.classList.remove('darkModeForm')
+        myIcon.classList.remove('fa-sun', 'text-white')
+    } else {
+        myHtml.setAttribute('data-bs-theme', 'dark');
+        myIcon.classList.add('fa-sun', 'text-white')
+        myIcon.classList.remove('fa-moon', 'text-black');
+        myForm.classList.add('darkModeForm')
+    }
+});
+
+
+
+const nameUser = document.querySelector('#nameUser')
+const emailUser = document.querySelector('#emailUser')
+const myForm = document.querySelector('form')
+const btnInvia = document.querySelector('#btnInvia');
+const mesForm = document.querySelector('#mesForm');
+myForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (myForm.checkValidity()) {
+
+        const userName = nameUser.value;
+        const userEmail = emailUser.value;
+        mesForm.textContent = `✅ grazie ${userName}.La ricontatteremo all email: ${userEmail}`
+        mesForm.classList.add('alert-success')
+        mesForm.classList.remove('alert-danger','d-none')
+        nameUser.classList.remove('is-invalid');
+        emailUser.classList.remove('is-invalid');
+        emailUser.classList.add('is-valid');
+        nameUser.classList.add('is-valid');
+        myForm.reset();
+    } else {
+        mesForm.classList.remove('d-none')
+        mesForm.textContent = `❌ Il form non e' compilato correttamente`
+        mesForm.classList.add('alert-danger')
+       if (!nameUser.checkValidity()) {
+            nameUser.classList.add('is-invalid');
+            nameUser.classList.remove('is-valid');
+        } else {
+            nameUser.classList.remove('is-invalid');
+            nameUser.classList.add('is-valid');
+        }
+        
+        if (!emailUser.checkValidity()) {
+            emailUser.classList.add('is-invalid');
+            emailUser.classList.remove('is-valid');
+        } else {
+            emailUser.classList.remove('is-invalid');
+            emailUser.classList.add('is-valid');
+        }
+    }
+    setTimeout(() => {
+        mesForm.textContent = ''
+        mesForm.classList.add('d-none')
+        mesForm.classList.remove('alert-danger', 'alert-success')
+    }, 5000)
+
+
+});
+
+
+
