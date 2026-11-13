@@ -1,0 +1,64 @@
+// BUTTON: sfondo e bordo hsl(20, 30%, 35%)
+// BUTTON HOVER: sfondo e bordo hsl(20, 30%, 27%)
+// COLORE TESTO: hsl(20, 30%, 35%)
+// SFONDO PRINCIPALE: hsl(20, 30%, 35%)
+// SFONDO NAV: hsl(20, 20%, 15%)
+// SFONDO HERO: hsl(20, 30%, 35%)
+// BOX SHADOW CARD: 0 2px 6px rgba(0, 0, 0, 0.08)
+// BOX SHADOW CARD HOVER: 0 10px 24px rgba(0, 0, 0, 0.12)
+// SFONDO FOOTER: hsl(20, 20%, 15%)
+// LINK FOOTER HOVER: hsl(40, 30%, 90%)
+
+$sfondoNavFooter: hsl(20, 20%, 15%);
+$sfondoHero:  hsl(20, 30%, 35%);
+
+
+@mixin btnProgectDefoult {
+    background-color: hsl(20, 30%, 35%);
+    border: 1px solid hsl(20, 30%, 35%);
+    padding: 3px 8px;
+}
+
+
+.navbar-brand,
+.nav-link {
+   color : hsl(30, 12%, 94%) !important;
+}
+
+.btnProgect {
+    @include btnProgectDefoult();
+
+}
+
+.bg-body-progect {
+    background-color: $sfondoNavFooter;
+}
+
+.navbar-toggler {
+    color: white;
+    border: 1px solid white;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 1px white;
+}
+
+.hero {
+    height:80vh;
+    background-color: $sfondoHero;
+    color: white;
+    a{
+        color: white;
+    }
+    a:hover {
+        background-color: hsl(20, 30%, 27%);
+       
+    }
+    a:active,
+    a:focus{
+         border: 1px solid hsl(20, 30%, 27%);
+    }
+    
+}
+
+

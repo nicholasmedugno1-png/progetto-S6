@@ -1,0 +1,41 @@
+.navbar-brand,
+.nav-link {
+  color: hsl(30, 12%, 94%) !important;
+}
+
+.btnProgect {
+  background-color: hsl(20, 30%, 35%);
+  border: 1px solid hsl(20, 30%, 35%);
+  padding: 3px 8px;
+}
+
+.bg-body-progect {
+  background-color: hsl(20, 20%, 15%);
+}
+
+.navbar-toggler {
+  color: white;
+  border: 1px solid white;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 1px white;
+}
+
+.hero {
+  height: 80vh;
+  background-color: hsl(20, 30%, 35%);
+  color: white;
+}
+.hero a {
+  color: white;
+}
+.hero a:hover {
+  background-color: hsl(20, 30%, 27%);
+}
+.hero a:active,
+.hero a:focus {
+  border: 1px solid hsl(20, 30%, 27%);
+}
+
+/*# sourceMappingURL=style.css.map */
