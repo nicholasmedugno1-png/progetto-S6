@@ -3,7 +3,7 @@
 //          animazione refresh card 
 //           dark mode
 //          click su card apre modale con descrizione specifica se si clicca fuori dalla modale non si chiude ma pulsa          
-
+//          se si resta per due secondi su un img viene sparata a tutto schermo il body smette di scrollare e per chiuderla bisogna cliccare fuori dall img
 const myArrayCard = [
     {
         icon: '🏠',
@@ -105,10 +105,14 @@ function stampaCard(array, contenitorePadre) {
         const myDivInterno = document.createElement('div');
         myDivInterno.classList.add('mb-2', 'rounded');
         myDivInterno.style.height = '50%';
+        myDivInterno.setAttribute('title', 'Resta sull\'immagine per 3 secondi per vederla a tutto schermo');
         const myImgPro = document.createElement('img');
         myImgPro.classList.add('w-100', 'h-100', 'object-fit-cover', 'rounded');
         myImgPro.src = `${item.img}`
         myDivInterno.appendChild(myImgPro)
+        attivaTimerImg(myImgPro, item.img);
+        myDivInterno.appendChild(myImgPro)
+
         const myTitleProd = document.createElement('h3');
         myTitleProd.classList.add('fs-5', 'fw-bold');
         myTitleProd.textContent = `${item.name}`
@@ -218,7 +222,7 @@ myForm.addEventListener('submit', (e) => {
         const userEmail = emailUser.value;
         mesForm.textContent = `✅ grazie ${userName}.La ricontatteremo all email: ${userEmail}`
         mesForm.classList.add('alert-success')
-        mesForm.classList.remove('alert-danger','d-none')
+        mesForm.classList.remove('alert-danger', 'd-none')
         nameUser.classList.remove('is-invalid');
         emailUser.classList.remove('is-invalid');
         emailUser.classList.add('is-valid');
@@ -228,14 +232,14 @@ myForm.addEventListener('submit', (e) => {
         mesForm.classList.remove('d-none')
         mesForm.textContent = `❌ Il form non e' compilato correttamente`
         mesForm.classList.add('alert-danger')
-       if (!nameUser.checkValidity()) {
+        if (!nameUser.checkValidity()) {
             nameUser.classList.add('is-invalid');
             nameUser.classList.remove('is-valid');
         } else {
             nameUser.classList.remove('is-invalid');
             nameUser.classList.add('is-valid');
         }
-        
+
         if (!emailUser.checkValidity()) {
             emailUser.classList.add('is-invalid');
             emailUser.classList.remove('is-valid');
@@ -254,4 +258,42 @@ myForm.addEventListener('submit', (e) => {
 });
 
 
+function apriImgSchermoIntero(ImgDaAppend) {
+    document.body.style.overflow = 'hidden';
+    const overlay = document.createElement('div');
+    overlay.classList.add('fullscreenOverlay', 'fullscreen-overlay', 'position-fixed', 'top-0', 'start-0','w-100', 'h-100', 'd-flex', 'justify-content-center', 'align-items-center', 'fade');
 
+    const imgSchermoIntero = document.createElement('img');
+    imgSchermoIntero.src = ImgDaAppend;
+    imgSchermoIntero.classList.add('rounded', 'shadow-lg', 'object-fit-contain');
+
+    overlay.appendChild(imgSchermoIntero);
+    document.body.appendChild(overlay);
+
+    setTimeout(() => {
+        overlay.classList.add('show');
+    }, 10);
+
+    
+    overlay.addEventListener('click', () => {
+        overlay.classList.remove('show');
+        setTimeout(() => {
+            overlay.remove();
+            document.body.style.overflow = '';
+        }, 1000);
+    });
+} 
+
+function attivaTimerImg(imgItem, imgUrl) {
+    let hoverTimer = null
+
+    imgItem.addEventListener('mouseenter', () => {
+        hoverTimer = setTimeout(() => {
+            apriImgSchermoIntero(imgUrl)
+        }, 3000);
+    });
+
+    imgItem.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
+    });
+}
