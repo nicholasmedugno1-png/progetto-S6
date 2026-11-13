@@ -11,12 +11,17 @@
 
 $sfondoNavFooter: hsl(20, 20%, 15%);
 $sfondoHero:  hsl(20, 30%, 35%);
-
+$textProgrct:  hsl(20, 30%, 35%);
 
 @mixin btnProgectDefoult {
     background-color: hsl(20, 30%, 35%);
     border: 1px solid hsl(20, 30%, 35%);
     padding: 3px 8px;
+}
+
+@mixin animationCard {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -61,4 +66,31 @@ $sfondoHero:  hsl(20, 30%, 35%);
     
 }
 
+.card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    
+    
+    &:hover {
+        @include animationCard()
+    }
+    &:active{
+        box-shadow: none;
+    }
+}
+    
+
+.nav-link {
+    color: $textProgrct !important;
+    border-radius: 8px
+}
+
+.nav-link:hover {
+    background-color: $sfondoHero;
+    border-radius: 8px;
+    color: $sfondoNavFooter !important;
+}
+
+input:focus {
+    box-shadow: none;
+}
 
